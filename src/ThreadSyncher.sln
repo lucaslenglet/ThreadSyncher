@@ -7,6 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Poc.ThreadSyncher.WebApp", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThreadSyncher", "ThreadSyncher\ThreadSyncher.csproj", "{F83CD492-C90B-49FA-A30C-FE67D6E1BB76}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Éléments de solution", "Éléments de solution", "{6CBE3082-68D7-43BC-A0C0-DDA52C1D8DE6}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		..\.github\workflows\publish_nuget.yml = ..\.github\workflows\publish_nuget.yml
+		..\version.json = ..\version.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

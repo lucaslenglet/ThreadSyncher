@@ -1,0 +1,36 @@
+name: Publish NuGet Package
+
+on:
+  push:
+    branches:
+      - main  # Déclenche le workflow sur les push vers la branche main
+    tags:
+      - '*'  # Déclenche le workflow sur tous les tags
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest  # Exécute le job sur la dernière version d'Ubuntu
+    defaults:
+      run:
+        working-directory: src/ThreadSyncher
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3  # Récupère le code source du dépôt
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'  # Spécifie la version de .NET à utiliser
+
+      - name: Install Nerdbank.GitVersioning
+        run: dotnet tool install --global nbgv
+
+      - name: Calculate version
+        run: nbgv cloud
+        id: nbgv  # Stocke les résultats pour les utiliser dans les étapes suivantes
+
+      - name: Build and pack
+        run: dotnet pack --configuration Release --output nupkgs /p:Version=${{ steps.nbgv.outputs.NuGetPackageVersion }}
+
+      - name: Publish NuGet package
+        run: dotnet nuget push "nupkgs/*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
