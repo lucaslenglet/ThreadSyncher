@@ -1,0 +1,9 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+@host=https://localhost:49675
+@key=SomeKey
+
+GET {{host}}/pull/{{key}}
+
+###
+
+POST {{host}}/push/{{key}}
