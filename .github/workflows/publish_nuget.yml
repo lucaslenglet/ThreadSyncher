@@ -16,6 +16,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3  # Récupère le code source du dépôt
+        with:
+          fetch-depth: 0 # avoid shallow clone so nbgv can do its work.
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
